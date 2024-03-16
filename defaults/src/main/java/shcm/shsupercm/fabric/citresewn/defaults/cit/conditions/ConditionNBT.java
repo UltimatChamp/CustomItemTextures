@@ -20,7 +20,7 @@ public class ConditionNBT extends CITCondition {
             "nbt");
 
     protected String[] path;
-
+    protected Boolean exists = null;
     protected StringMatcher matchString = null;
     protected NbtInt matchInteger = null;
     protected NbtByte matchByte = null;
@@ -39,6 +39,8 @@ public class ConditionNBT extends CITCondition {
         for (String s : path)
             if (s.isEmpty())
                 throw new CITParsingException("Path segment cannot be empty", properties, value.position());
+        if (value.value().startsWith("exists:"))
+        {exists = Boolean.parseBoolean(value.value().substring(7)); return;}
 
         try {
             if (value.value().startsWith("regex:"))
@@ -89,7 +91,7 @@ public class ConditionNBT extends CITCondition {
 
     protected boolean testPath(NbtElement element, int pathIndex) {
         if (element == null)
-            return false;
+            return exists != null && !exists;
 
         if (pathIndex >= path.length)
             return testValue(element);
@@ -122,22 +124,24 @@ public class ConditionNBT extends CITCondition {
     }
 
     private boolean testValue(NbtElement element) {
-        if (element instanceof NbtString nbtString) //noinspection ConstantConditions
-            return matchString.matches(nbtString.asString()) || matchString.matches(Text.Serializer.fromLenientJson(nbtString.asString()).getString());
-        else if (element instanceof NbtInt nbtInt && matchInteger != null)
-            return nbtInt.equals(matchInteger);
-        else if (element instanceof NbtByte nbtByte && matchByte != null)
-            return nbtByte.equals(matchByte);
-        else if (element instanceof NbtFloat nbtFloat && matchFloat != null)
-            return nbtFloat.equals(matchFloat);
-        else if (element instanceof NbtDouble nbtDouble && matchDouble != null)
-            return nbtDouble.equals(matchDouble);
-        else if (element instanceof NbtLong nbtLong && matchLong != null)
-            return nbtLong.equals(matchLong);
-        else if (element instanceof NbtShort nbtShort && matchShort != null)
-            return nbtShort.equals(matchShort);
-        else if (element instanceof NbtCompound nbtCompound && matchCompound != null)
-            return NbtHelper.matches(matchCompound, nbtCompound, true);
+        try {
+            if (exists != null) return exists;
+            if (element instanceof NbtString nbtString) //noinspection ConstantConditions
+                return matchString.matches(nbtString.asString()) || matchString.matches(Text.Serializer.fromJson(nbtString.asString()).getString());
+            else if (element instanceof NbtInt nbtInt && matchInteger != null)
+                return nbtInt.equals(matchInteger);
+            else if (element instanceof NbtByte nbtByte && matchByte != null)
+                return nbtByte.equals(matchByte);
+            else if (element instanceof NbtFloat nbtFloat && matchFloat != null)
+                return nbtFloat.equals(matchFloat);
+            else if (element instanceof NbtDouble nbtDouble && matchDouble != null)
+                return nbtDouble.equals(matchDouble);
+            else if (element instanceof NbtLong nbtLong && matchLong != null)
+                return nbtLong.equals(matchLong);
+            else if (element instanceof NbtShort nbtShort && matchShort != null)
+                return nbtShort.equals(matchShort);
+            else if (element instanceof NbtCompound nbtCompound && matchCompound != null)
+                return NbtHelper.matches(matchCompound, nbtCompound, true);
 
         if (element instanceof AbstractNbtNumber nbtNumber && !(matchString instanceof StringMatcher.DirectMatcher))
             return matchString.matches(String.valueOf(nbtNumber.numberValue()));
