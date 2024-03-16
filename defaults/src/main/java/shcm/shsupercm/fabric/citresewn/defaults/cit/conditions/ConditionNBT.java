@@ -16,7 +16,8 @@ import java.util.regex.PatternSyntaxException;
 
 public class ConditionNBT extends CITCondition {
     @Entrypoint(CITConditionContainer.ENTRYPOINT)
-    public static final CITConditionContainer<ConditionNBT> CONTAINER = new CITConditionContainer<>(ConditionNBT.class, ConditionNBT::new,
+    public static final CITConditionContainer<ConditionNBT> CONTAINER = new CITConditionContainer<>(ConditionNBT.class,
+            ConditionNBT::new,
             "nbt");
 
     protected String[] path;
@@ -39,8 +40,10 @@ public class ConditionNBT extends CITCondition {
         for (String s : path)
             if (s.isEmpty())
                 throw new CITParsingException("Path segment cannot be empty", properties, value.position());
-        if (value.value().startsWith("exists:"))
-        {exists = Boolean.parseBoolean(value.value().substring(7)); return;}
+        if (value.value().startsWith("exists:")) {
+            exists = Boolean.parseBoolean(value.value().substring(7));
+            return;
+        }
 
         try {
             if (value.value().startsWith("regex:"))
@@ -55,7 +58,8 @@ public class ConditionNBT extends CITCondition {
                 matchString = new StringMatcher.DirectMatcher(value.value());
         } catch (PatternSyntaxException e) {
             throw new CITParsingException("Malformatted regex expression", properties, value.position(), e);
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         try {
             if (value.value().startsWith("#"))
                 matchInteger = NbtInt.of(Integer.parseInt(value.value().substring(1).toLowerCase(Locale.ENGLISH), 16));
@@ -63,25 +67,32 @@ public class ConditionNBT extends CITCondition {
                 matchInteger = NbtInt.of(Integer.parseInt(value.value().substring(2).toLowerCase(Locale.ENGLISH), 16));
             else
                 matchInteger = NbtInt.of(Integer.parseInt(value.value()));
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         try {
             matchByte = NbtByte.of(Byte.parseByte(value.value()));
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         try {
             matchFloat = NbtFloat.of(Float.parseFloat(value.value()));
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         try {
             matchDouble = NbtDouble.of(Double.parseDouble(value.value()));
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         try {
             matchLong = NbtLong.of(Long.parseLong(value.value()));
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         try {
             matchShort = NbtShort.of(Short.parseShort(value.value()));
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         try {
             matchCompound = StringNbtReader.parse(value.value());
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
@@ -116,7 +127,8 @@ public class ConditionNBT extends CITCondition {
 
                 try {
                     return testPath(list.get(Integer.parseInt(path)), pathIndex + 1);
-                } catch (NumberFormatException | IndexOutOfBoundsException ignored) { }
+                } catch (NumberFormatException | IndexOutOfBoundsException ignored) {
+                }
             }
         }
 
@@ -124,24 +136,25 @@ public class ConditionNBT extends CITCondition {
     }
 
     private boolean testValue(NbtElement element) {
-        try {
-            if (exists != null) return exists;
-            if (element instanceof NbtString nbtString) //noinspection ConstantConditions
-                return matchString.matches(nbtString.asString()) || matchString.matches(Text.Serializer.fromJson(nbtString.asString()).getString());
-            else if (element instanceof NbtInt nbtInt && matchInteger != null)
-                return nbtInt.equals(matchInteger);
-            else if (element instanceof NbtByte nbtByte && matchByte != null)
-                return nbtByte.equals(matchByte);
-            else if (element instanceof NbtFloat nbtFloat && matchFloat != null)
-                return nbtFloat.equals(matchFloat);
-            else if (element instanceof NbtDouble nbtDouble && matchDouble != null)
-                return nbtDouble.equals(matchDouble);
-            else if (element instanceof NbtLong nbtLong && matchLong != null)
-                return nbtLong.equals(matchLong);
-            else if (element instanceof NbtShort nbtShort && matchShort != null)
-                return nbtShort.equals(matchShort);
-            else if (element instanceof NbtCompound nbtCompound && matchCompound != null)
-                return NbtHelper.matches(matchCompound, nbtCompound, true);
+        if (exists != null)
+            return exists;
+        if (element instanceof NbtString nbtString) // noinspection ConstantConditions
+            return matchString.matches(nbtString.asString())
+                    || matchString.matches(Text.Serializer.fromJson(nbtString.asString()).getString());
+        else if (element instanceof NbtInt nbtInt && matchInteger != null)
+            return nbtInt.equals(matchInteger);
+        else if (element instanceof NbtByte nbtByte && matchByte != null)
+            return nbtByte.equals(matchByte);
+        else if (element instanceof NbtFloat nbtFloat && matchFloat != null)
+            return nbtFloat.equals(matchFloat);
+        else if (element instanceof NbtDouble nbtDouble && matchDouble != null)
+            return nbtDouble.equals(matchDouble);
+        else if (element instanceof NbtLong nbtLong && matchLong != null)
+            return nbtLong.equals(matchLong);
+        else if (element instanceof NbtShort nbtShort && matchShort != null)
+            return nbtShort.equals(matchShort);
+        else if (element instanceof NbtCompound nbtCompound && matchCompound != null)
+            return NbtHelper.matches(matchCompound, nbtCompound, true);
 
         if (element instanceof AbstractNbtNumber nbtNumber && !(matchString instanceof StringMatcher.DirectMatcher))
             return matchString.matches(String.valueOf(nbtNumber.numberValue()));
