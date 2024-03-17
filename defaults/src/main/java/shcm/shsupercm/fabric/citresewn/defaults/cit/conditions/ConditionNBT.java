@@ -140,7 +140,7 @@ public class ConditionNBT extends CITCondition {
             return exists;
         if (element instanceof NbtString nbtString) // noinspection ConstantConditions
             return matchString.matches(nbtString.asString())
-                    || matchString.matches(Text.Serializer.fromJson(nbtString.asString()).getString());
+                    || matchString.matches(Text.Serialization.fromJson(nbtString.asString()).getString());
         else if (element instanceof NbtInt nbtInt && matchInteger != null)
             return nbtInt.equals(matchInteger);
         else if (element instanceof NbtByte nbtByte && matchByte != null)
