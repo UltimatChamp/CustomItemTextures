@@ -2,17 +2,17 @@
   "schemaVersion": 1,
   "id": "citresewn",
   "version": "${mod_version}",
-  "name": "CIT Resewn",
+  "name": "CustomItemTextures",
   "description": "Re-implements MCPatcher's CIT",
   "authors": [
-    "SHsuperCM"
+    "UltimatChamp","SHsuperCM"
   ],
   "license": "MIT",
   "icon": "assets/citresewn/logo.png",
   "contact": {
-    "homepage": "https://citresewn.shcm.io/",
-    "sources": "https://github.com/SHsuperCM/CITResewn",
-    "issues": "https://github.com/SHsuperCM/CITResewn/issues"
+    "homepage": "https://modrinth.com/mod/cit",
+    "sources": "https://github.com/UltimatChamp/CustomItemTextures",
+    "issues": "https://github.com/UltimatChamp/CustomItemTextures/issues"
   },
 
   "environment": "client",

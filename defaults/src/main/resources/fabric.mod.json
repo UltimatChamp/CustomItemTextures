@@ -2,17 +2,17 @@
   "schemaVersion": 1,
   "id": "citresewn-defaults",
   "version": "${mod_version}",
-  "name": "CIT Resewn: Defaults",
-  "description": "Default types and conditions for CIT Resewn",
+  "name": "CustomItemTextures: Defaults",
+  "description": "Default types and conditions for CustomItemTextures",
   "authors": [
-    "SHsuperCM"
+    "UltimatChamp","SHsuperCM"
   ],
   "license": "MIT",
   "icon": "assets/citresewn-defaults/logo.png",
   "contact": {
-    "homepage": "https://citresewn.shcm.io/",
-    "sources": "https://github.com/SHsuperCM/CITResewn",
-    "issues": "https://github.com/SHsuperCM/CITResewn/issues"
+    "homepage": "https://modrinth.com/mod/cit",
+    "sources": "https://github.com/UltimatChamp/CustomItemTextures",
+    "issues": "https://github.com/UltimatChamp/CustomItemTextures/issues"
   },
 
   "environment": "client",

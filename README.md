@@ -1,30 +1,30 @@
 <p align="center">
-  <img src="https://citresewn.shcm.io/img/project_description/logo_shadow.png" width="200px">
+  <img src="https://raw.githubusercontent.com/UltimatChamp/CustomItemTextures/main/src/main/resources/assets/citresewn/logo.png" width="200px">
 </p>
 
-CIT Resewn is MCPatcher's CIT features re-written outside of optifine as a standalone mod for fabric.
+MCPatcher's CIT w/o OptiFine. A reliable fork of CITResewn!
 
-The main CIT Resewn mod serves as an API to add types and conditions while CIT Resewn: Defaults uses that API to provide the default types and conditions that naturally come with the CIT format.
+The main CIT mod serves as an API to add types and conditions while CIT: Defaults uses that API to provide the default types and conditions that naturally come with the CIT format.
 
 ## Downloads
-You can get CIT Resewn(bundled with Defaults) from Modrinth, Curse Forge or by compiling it from source
+You can get CIT(bundled with Defaults) from Modrinth, CurseForge or by compiling it from source
 
-              <a href="https://modrinth.com/mod/cit-resewn"><img src="https://citresewn.shcm.io/img/modrinth.png" width="50px"></a>       
-<a href="https://www.curseforge.com/minecraft/mc-mods/cit-resewn"><img src="https://citresewn.shcm.io/img/curseforge.png" width="50px"></a>
+              <a href="https://modrinth.com/mod/cit"><img src="https://citresewn.shcm.io/img/modrinth.png" width="50px"></a>       
+<a href="https://www.curseforge.com/minecraft/mc-mods/cit"><img src="https://citresewn.shcm.io/img/curseforge.png" width="50px"></a>
 
 ## CIT Docs
 Docs for CIT Resewn's usage are available over at https://citresewn.shcm.io
 
 ## API
 
-CIT Resewn is distributed for development through Modrinth's Maven repository under `cit-resewn`.<br>
+CIT is distributed for development through Modrinth's Maven repository under `cit`.<br>
 Defaults can be added separately through the same Maven under `cit-resewn-defaults`.
 
 Gradle example:
 ```groovy
 // Add the modrinth maven repository:
 repositories {
-    ..
+    ...
     maven {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven"
@@ -35,17 +35,17 @@ repositories {
 }
 
 dependencies {
-    ..
-    // Add the base CIT Resewn API to the project
-    modCompileOnly "maven.modrinth:cit-resewn:1.1.2+1.19.2"
+    ...
+    // Add the base CIT API to the project
+    modCompileOnly "maven.modrinth:cit:1.0.0+1.20.4"
     // Add Defaults to the project
-    modCompileOnly "maven.modrinth:cit-resewn-defaults:1.1.2+1.19.2"
+    modCompileOnly "maven.modrinth:cit-resewn-defaults:1.1.3+1.20"
 }
 ```
 
 API usage documentation will be available soon over at [the docs](https://citresewn.shcm.io/mods/mod_api/).
 
-For example usage of the CIT Resewn API, take a look at how Defaults does it.
+For example usage of the CIT API, take a look at how Defaults does it.
 
 ## Contributing
 

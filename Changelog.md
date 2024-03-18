@@ -1,1 +1,6 @@
- - Updated to 1.20
+ - Updated to 1.20.4
+ - Feature: "exists:" prefix
+ - Improve performance of NBT String parsing
+ - Fix any unknown condition breaks cit completely
+ - Add null checks to enchantment type
+ - Update lastCachedStamp on cache hit
