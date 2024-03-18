@@ -10,7 +10,7 @@ The main CIT mod serves as an API to add types and conditions while CIT: Default
 You can get CIT(bundled with Defaults) from Modrinth, CurseForge or by compiling it from source
 
               <a href="https://modrinth.com/mod/cit"><img src="https://citresewn.shcm.io/img/modrinth.png" width="50px"></a>       
-<a href="https://www.curseforge.com/minecraft/mc-mods/cit"><img src="https://citresewn.shcm.io/img/curseforge.png" width="50px"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/cit-fork"><img src="https://citresewn.shcm.io/img/curseforge.png" width="50px"></a>
 
 ## CIT Docs
 Docs for CIT Resewn's usage are available over at https://citresewn.shcm.io
@@ -54,3 +54,6 @@ Bug fixes and feature implementations are always welcome and will usually be acc
 Translations aren't really necessary but if you PR them there's no reason they won't be accepted.
 
 Lastly, the docs site is also open source, PRs can be made to the [docs branch](https://github.com/SHsuperCM/CITResewn/tree/docs).
+
+## Disclaimer
+This is a temporary fork of **CITResewn**. The project will be archived, once the original mod is updated.
